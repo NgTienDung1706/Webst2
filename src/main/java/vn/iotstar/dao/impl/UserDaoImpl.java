@@ -3,6 +3,7 @@ package vn.iotstar.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -179,6 +180,27 @@ public class UserDaoImpl implements IUserDao {
 		conn.close();
 		} catch (Exception ex) {}
 		return duplicate;
+	}
+
+	public void updatePassword(String email, String password) 
+	{
+		String sql = "UPDATE users SET password = ? WHERE email = ?";
+        try {
+        	conn = new DBConnectSQL().getConnection();
+			ps = conn.prepareStatement(sql);
+            ps.setString(1, password);
+            ps.setString(2, email);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Password updated successfully.");
+            } else {
+                System.out.println("No user found with the specified email.");
+            }
+
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
