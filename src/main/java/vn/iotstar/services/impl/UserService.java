@@ -28,4 +28,35 @@ public class UserService implements IUserService{
 			// TODO: handle exception
 		}
 	}
+
+	@Override
+	public void insert(UserModel user) {
+		userDao.insert(user);
+	}
+
+	@Override
+	public boolean register(String username, String password, String fullname,String email, String phone,int roleid) {
+		if (userDao.checkExistUsername(username)) {
+			return false;
+			}
+			//long millis=System.currentTimeMillis();
+			//java.sql.Date date=new java.sql.Date(millis);
+			userDao.insert(new UserModel(username,password,fullname,email,phone,roleid));
+			return true;
+	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		return userDao.checkExistEmail(email);
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		return userDao.checkExistUsername(username);
+	}
+
+	@Override
+	public boolean checkExistPhone(String phone) {
+		return userDao.checkExistPhone(phone);
+	}
 }

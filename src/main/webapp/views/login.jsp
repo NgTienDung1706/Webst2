@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Login Page</title>
 <style type="text/css">
 form {
 	border: 3px solid #f1f1f1;
@@ -85,23 +85,29 @@ span.psw {
 <body>
 	<form action="/ltwebst2/login" method="post">
 		<c:if test="${alert !=null}">
-			<h3 class="alert alert danger">${alert}</h3>
+			<h3 class="alert alert-danger">${alert}</h3>
 		</c:if>
 		<div class="container">
-			<label for="uname"><b>Username</b></label> <input type="text"
-				placeholder="Enter Username" name="uname" > <label
-				for="psw"><b>Password</b></label> <input type="password"
-				placeholder="Enter Password" name="psw" >
+			<label for="uname"><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="uname" required>
+			
+			<label for="psw"><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="psw" required>
 
 			<button type="submit">Login</button>
-			<label> <input type="checkbox" checked="checked"
-				name="remember"> Remember me
+			<label>
+				<input type="checkbox" name="remember"> Remember me
 			</label>
 		</div>
 
 		<div class="container" style="background-color: #f1f1f1">
 			<button type="button" class="cancelbtn">Cancel</button>
 			<span class="psw">Forgot <a href="#">password?</a></span>
+		</div>
+		
+		<!-- Thêm nút hoặc liên kết đăng ký ở đây -->
+		<div class="container" style="background-color: #f1f1f1">
+			<p>Don't have an account? <a href="${pageContext.request.contextPath}/register">Sign up here</a></p>
 		</div>
 	</form>
 </body>

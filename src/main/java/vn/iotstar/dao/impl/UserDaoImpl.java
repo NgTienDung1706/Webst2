@@ -73,18 +73,17 @@ public class UserDaoImpl implements IUserDao {
 
 	@Override
 	public void insert(UserModel user) {
-		String sql = "INSERT INTO users(id,username,password,images,fullname,email,phone,roleid,createDate) VALUES (?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO users(username,password,fullname,email,phone,roleid) VALUES (?,?,?,?,?,?)";
 		try {
-			//conn=super.getDatabaseConnection();
+			conn = new DBConnectSQL().getConnection();
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, user.getId());
-			ps.setString(2,user.getUsername());
-			ps.setString(3,user.getEmail());
-			ps.setString(4,user.getFullname());
-			ps.setString(5,user.getImages());
-			ps.setString(6,user.getPassword());
-			
+			ps.setString(1,user.getUsername());
+			ps.setString(2,user.getPassword());
+			ps.setString(3,user.getFullname());
+			ps.setString(4,user.getEmail());
+			ps.setString(5,user.getPhone());
+			ps.setInt(6, user.getRoleid());
 			ps.executeUpdate();
 			
 		} catch (Exception e) {
@@ -126,6 +125,60 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return null;
 
+	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		boolean duplicate = false;
+		String query = "select * from users where email = ?";
+		try {
+		conn = new DBConnectSQL().getConnection();
+		ps = conn.prepareStatement(query);
+		ps.setString(1, email);
+		rs = ps.executeQuery();
+		if (rs.next()) {
+		duplicate = true;
+		}
+		ps.close();
+		conn.close();
+		} catch (Exception ex) {}
+		return duplicate;
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		boolean duplicate = false;
+		String query = "select * from users where username = ?";
+		try {
+		conn = new DBConnectSQL().getConnection();
+		ps = conn.prepareStatement(query);
+		ps.setString(1, username);
+		rs = ps.executeQuery();
+		if (rs.next()) {
+		duplicate = true;
+		}
+		ps.close();
+		conn.close();
+		} catch (Exception ex) {}
+		return duplicate;
+	}
+
+	@Override
+	public boolean checkExistPhone(String phone) {
+		boolean duplicate = false;
+		String query = "select * from [users] where phone = ?";
+		try {
+		conn = new DBConnectSQL().getConnection();
+		ps = conn.prepareStatement(query);
+		ps.setString(1, phone);
+		rs = ps.executeQuery();
+		if (rs.next()) {
+		duplicate = true;
+		}
+		ps.close();
+		conn.close();
+		} catch (Exception ex) {}
+		return duplicate;
 	}
 
 }
