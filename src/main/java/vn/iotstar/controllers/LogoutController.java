@@ -21,6 +21,6 @@ public class LogoutController extends HttpServlet {
         }
 
         // Chuyển hướng về trang đăng nhập hoặc trang khác
-        resp.sendRedirect(req.getContextPath() + "/login");
+        resp.sendRedirect(req.getContextPath() + "/home");
 	}
 }

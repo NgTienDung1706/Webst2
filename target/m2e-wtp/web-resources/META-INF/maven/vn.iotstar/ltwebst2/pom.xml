@@ -7,6 +7,13 @@
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<dependencies>
+		<!-- ... other dependencies -->
+    	<dependency>
+			<groupId>org.sitemesh</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
