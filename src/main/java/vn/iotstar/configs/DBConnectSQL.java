@@ -13,9 +13,6 @@ import java.sql.SQLException;
 		private final String password ="170604";
 		public Connection getConnection() throws Exception {
 				String url="jdbc:sqlserver://"+serverName+":"+portNumber+";databaseName="+dbName;
-				//"\\"+instance+
-				//if(instance ==null|| instance.trim().isEmpty())
-					//url = "jdbc:sqlserver://"+serverName+":"+portNumber+";databaseName="+dbName;
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				return DriverManager.getConnection(url,userID,password);
 
