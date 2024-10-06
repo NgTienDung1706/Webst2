@@ -63,4 +63,9 @@ public class UserService implements IUserService{
 	public void updatePasswordByEmail(String email, String password) {
 		userDao.updatePassword(email, password);
 	}
+
+	@Override
+	public boolean updateImage(String username, String newIamge) {
+		return userDao.updateImage(username, newIamge);
+	}
 }

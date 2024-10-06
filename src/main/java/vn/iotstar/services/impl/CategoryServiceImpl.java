@@ -4,44 +4,48 @@ import java.util.List;
 
 import vn.iotstar.dao.ICategoryDao;
 import vn.iotstar.dao.impl.CategoryDaoImpl;
-import vn.iotstar.model.CategotyModel;
+import vn.iotstar.model.CategoryModel;
 import vn.iotstar.services.CategoryService;
 import vn.iotstar.services.IUserService;
 
 public class CategoryServiceImpl implements CategoryService{
-	ICategoryDao cateDao=new CategoryDaoImpl();
+	public ICategoryDao cateDao=new CategoryDaoImpl();
 	@Override
-	public List<CategotyModel> findAll() {
+	public List<CategoryModel> findAll() {
 		return cateDao.findAll();	}
 
 	@Override
-	public CategotyModel findById(int id) {
+	public CategoryModel findById(int id) {
 		return cateDao.findById(id);
 	}
 
 	@Override
-	public CategotyModel findName(String name) {
+	public CategoryModel findName(String name) {
 		return cateDao.findName(name);
 	}
 
 	@Override
-	public List<CategotyModel> searchByName(String keyword) {
+	public List<CategoryModel> searchByName(String keyword) {
 		return cateDao.searchByName(keyword);
 	}
 
 	@Override
-	public void insert(CategotyModel category) {
-		CategotyModel cate = this.findName(category.getCategoryname());
-		if(cate!=null)
-		{
-			cateDao.insert(category);
-		}
-		
+	public void insert(CategoryModel category) {
+//		CategoryModel cate = this.findName(category.getCategoryname());
+//		if(cate!=null)
+//		{
+//			cateDao.insert(category);
+//		}
+		CategoryModel categoryModel = this.findName(category.getCategoryname());
+        if (categoryModel.getCategoryname() == null) {
+            cateDao.insert(category);
+        }
 	}
 
 	@Override
-	public void update(CategotyModel category) {
-		CategotyModel cate = this.findName(category.getCategoryname());
+	public void update(CategoryModel category) {
+		CategoryModel cate = new CategoryModel();
+		cate = cateDao.findById(category.getCategoryid());
 		if(cate!=null)
 		{
 			cateDao.update(category);
@@ -50,14 +54,18 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public void delete(CategotyModel category) {
-		// TODO Auto-generated method stub
-		
+	public void delete(int id) {
+		CategoryModel cate = new CategoryModel();
+		cate = cateDao.findById(id);
+		if(cate!=null)
+		{
+			cateDao.delete(id);
+		}
 	}
 
 	@Override
 	public void updatestatus(int id, int status) {
-		// TODO Auto-generated method stub
+		cateDao.updatestatus(id, status);
 		
 	}
 	public static void main(String[] args) {

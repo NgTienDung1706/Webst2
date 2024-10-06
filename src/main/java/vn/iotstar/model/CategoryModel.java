@@ -2,25 +2,14 @@ package vn.iotstar.model;
 
 import java.io.Serializable;
 
-public class CategotyModel implements Serializable{
-
-	/**
-	 * 
-	 */
+public class CategoryModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int categoryid;
 	private String categoryname;
 	private String images;
 	private int status;
-	public CategotyModel(int categoryid, String categoryname, String images, int status) {
-		super();
-		this.categoryid = categoryid;
-		this.categoryname = categoryname;
-		this.images = images;
-		this.status = status;
-	}
 	
-	public CategotyModel() {
+	public CategoryModel() {
 		super();
 	}
 
@@ -53,6 +42,4 @@ public class CategotyModel implements Serializable{
 		return "CategotyModel [categoryid=" + categoryid + ", categoryname=" + categoryname + ", images=" + images
 				+ ", status=" + status + "]";
 	}
-	
-	
 }

@@ -203,4 +203,24 @@ public class UserDaoImpl implements IUserDao {
 		}
 	}
 
+	@Override
+	public boolean updateImage(String username, String imageName) {
+		String sql = "UPDATE Users SET image = ? WHERE username = ?";
+        boolean isUpdated = false;
+        try {
+        	conn = new DBConnectSQL().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, imageName);
+            ps.setString(2, username);
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                isUpdated = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isUpdated;
+	}
+
 }
